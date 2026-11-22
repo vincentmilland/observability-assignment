@@ -1,6 +1,7 @@
 
 const { resourceFromAttributes } = require('@opentelemetry/resources');
 const { ATTR_SERVICE_NAME } = require('@opentelemetry/semantic-conventions');
+const { OTLPTraceExporter } = require('@opentelemetry/exporter-trace-otlp-http');
 
 const { NodeSDK } = require('@opentelemetry/sdk-node');
 
@@ -25,7 +26,7 @@ const sdk = new NodeSDK({
        [ATTR_SERVICE_NAME]: "todo-service"
    }),
 
-   traceExporter: new ConsoleSpanExporter(),
+   traceExporter: new OTLPTraceExporter(),
 
    metricReader: new PeriodicExportingMetricReader({
        exporter: new ConsoleMetricExporter(),
